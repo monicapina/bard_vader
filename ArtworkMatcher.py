@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 import os
-
+import utils
 class ArtworkMatcher:
     def __init__(self, database_path):
         self.database_path = database_path
@@ -60,9 +60,16 @@ class ArtworkMatcher:
         # Warp the image to a top-down view
         warped_artwork = cv2.warpPerspective(artwork_image, M, output_size)
 
+        cv2.imwrite('warped_artwork_pres.jpg', warped_artwork)
+        # Wait for 1 second
+        #cv2.waitKey(3000)
+
+        # Close the window
+        #cv2.destroyAllWindows(
         # Detect and compute keypoints and descriptors for the warped artwork
         keypoints, descriptors = self.orb.detectAndCompute(warped_artwork, None)
-
+        
+        
         # Initialize variables to store best match information
         best_match_index = 0
         best_match_score = 200
@@ -70,12 +77,18 @@ class ArtworkMatcher:
         # Match against each image in the database
         for i, image in enumerate(self.database_images):
             # Detect and compute keypoints and descriptors for the database image
+            image=utils.crop_image(image)
             keypoints_db, descriptors_db = self.orb.detectAndCompute(image, None)
-
+            
             # Find matches using brute force matcher
             matches = self.bf.match(descriptors, descriptors_db)
             matches = sorted(matches, key=lambda x: x.distance)
 
+            matched_image = cv2.drawMatches(warped_artwork, keypoints, image, keypoints_db, matches[:10], None, flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
+            title='matched_image'+str(i)+'.jpg'
+            # Save the image with matches
+            cv2.imwrite('/home/adaptai/repositories/openCV_2023/matches/'+title, matched_image)
+            
             # Calculate the total distance of the top 10 matches
             score = sum(match.distance for match in matches[:10])
 
@@ -83,6 +96,15 @@ class ArtworkMatcher:
             if score < best_match_score:
                 best_match_score = score
                 best_match_index = i
+        
+        artwork_with_keypoints = cv2.drawKeypoints(warped_artwork, keypoints, None, color=(0, 255, 0), flags=cv2.DRAW_MATCHES_FLAGS_NOT_DRAW_SINGLE_POINTS)
+        cv2.imwrite("artwork_with_keypoints.jpg", artwork_with_keypoints)
+        #cv2.imwrite('Best Match', best_match[0])
+        # Wait for 1 second
+        #cv2.waitKey(3000)
 
+        # Close the window
+        #cv2.destroyAllWindows()
+        
         # Return the best matching image and its title
         return self.database_images[best_match_index],self.database_title[best_match_index]
