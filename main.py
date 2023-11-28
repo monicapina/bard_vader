@@ -4,6 +4,7 @@ import os
 import ArtworkMatcher
 import utils
 import BardInterface
+import speech_recognition as sr
 
 def main():       
     
@@ -11,9 +12,10 @@ def main():
     matcher = ArtworkMatcher.ArtworkMatcher('/home/alvaro/ROVIT/openCV_2023/sample')
     # Create Bard interface object
     token_1PSID = 'cwhB4VVoardujruiFz8jnaxHWaYKv1A1F6Zjc-8NwQ10nDJLfR6xw9KuqZ1Xn3t-wEXyCA.'
-    token_1PSIDTS = 'sidts-CjIBNiGH7v0ne78_JqVz3FgQWxGGKvwg1MZiqVN1hjIfwO-06mwg_5IPwFbhcdcD5Dw-UxAA'
+    token_1PSIDTS = 'sidts-CjIBNiGH7sMbkgt3kYlAecCwBeQzb1z4I7tvnzzn-X0tjhlAnU71r7FJfRzGytm9copM_hAA'
     bard_interface = BardInterface.BardInterface(token_1PSID, token_1PSIDTS)
-
+    # Create speech-to-text recognizer
+    recognizer = sr.Recognizer()
     ###########################################################################
    
     # Example image from computer
@@ -47,14 +49,36 @@ def main():
 
     stop = False
     while not stop:
+        cv2.waitKey(3000)
         print('Do you have any other question?')
-        #TO DO: Interrupt to open the mic and wait for answer
-        if 'stop' is in audio:
-            stop=True
-        else:
-            #Ask another question
-            pass
+        # Open microphone and ask question. To stop execution, say "STOP"
+        with sr.Microphone() as source:
+            print('Listening...')
+            audio = recognizer.listen(source)
+        print('Microphone closed')
 
+        # Use Google STT module
+        try:
+            print('Converting audio to text...')
+            print('I think you said: ')
+            translation = recognizer.recognize_google(audio)
+            print(translation)
+
+            if 'stop' in translation:
+                print('Have a nice day')
+                stop = True
+            else:
+                # Ask followup question
+                question = translation
+                answer = bard_interface.ask(question)
+                print(answer)
+            
+        except sr.UnknownValueError:
+            print("Sorry, I didn't understand you. Closing app")
+            stop = True
+        except sr.RequestError as e:
+            print("Could not request results from Google Speech Recognition service; {0}".format(e))
+            stop = True
 
 
 
