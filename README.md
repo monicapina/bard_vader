@@ -70,7 +70,7 @@ and will show it on screen. A few seconds later, the window will close and the i
 Then, the answer provided by Bard will be printed out on the terminal from where you are executing the script. After that, the main microphone you have in your computer will be open and the conversation loop to get more information about the detected artwork will start.
 The process will be repeated as many times as the user wants, and will end when the user says "STOP" whenever the mic is open for a follow-up question.
 
-A link to a complete demo video of our application is included in the Results section of the Technical report linked in the documentation section.
+A link to a complete demo video of our application is can be seen in this [Youtube link](https://www.youtube.com/watch?v=8E6SS6LyEW4)
 
 ## Contributing
 
@@ -86,4 +86,4 @@ This project has been carried out mainly by Mónica Pina, Francisco Morillas, an
 
 ## Documentation
 
-You can find a more detailed technical report in [this Google Docs document]().
+You can find a more detailed technical report of our project [here](docs/technical_report.pdf). 
