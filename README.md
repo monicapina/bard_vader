@@ -49,11 +49,11 @@ database, the file should have a name similar to: `leonardo-da-vinci_gioconda.jp
 The application lets you capture images with your phone and send them to the computer where you are running the code. To do so, you need to install an app like "IP Webcam" on Play Store. More details about installation are in the documentation section.
 After installing the app, you need to write in the `utils.py` file the IP that is shown on IP Webcam's screen. This will connect your phone's camera to the computer. To capture the image, press `Esc` key on your keyboard. 
 
-![IP Webcam Image](images/ipwebcam.png){ width=50% }
+![IP Webcam Image](docs/ipwebcam_sample.png)
 
 ### Setting up Bard API tokens
 
-To use Google Bard API, you need to retrieve two different tokens in your Google Bard account. To do so, follow the instructions [here](https://github.com/dsdanielpark/Bard-API){:target="_blank"}, and copy the strings for the "Secure-1PSID" and "Secure-1PSIDTS"
+To use Google Bard API, you need to retrieve two different tokens in your Google Bard account. To do so, follow the instructions [here](https://github.com/dsdanielpark/Bard-API), and copy the strings for the "Secure-1PSID" and "Secure-1PSIDTS"
 tokens to the variables at the beginning of the `main.py` file. Please note that these tokens update every few minutes, so you might need to update them between executions. We are aware this is not too convenient, but it's the best we could offer without using
 a paid subscription to an LLM like ChatGPT. 
 
