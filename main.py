@@ -9,7 +9,7 @@ import speech_recognition as sr
 def main():       
     
     # Create Artwork Matcher
-    matcher = ArtworkMatcher.ArtworkMatcher('/home/alvaro/ROVIT/openCV_2023/sample')
+    matcher = ArtworkMatcher.ArtworkMatcher('./dataset/')
     # Create Bard interface object
     token_1PSID = 'cwhB4VVoardujruiFz8jnaxHWaYKv1A1F6Zjc-8NwQ10nDJLfR6xw9KuqZ1Xn3t-wEXyCA.'
     token_1PSIDTS = 'sidts-CjIBNiGH7sMbkgt3kYlAecCwBeQzb1z4I7tvnzzn-X0tjhlAnU71r7FJfRzGytm9copM_hAA'
@@ -20,15 +20,15 @@ def main():
    
     # Example image from computer
 
-    image_path = '/home/alvaro/ROVIT/openCV_2023/sample/akseli-gallen-kallela_ilmarinen-ploughing-the-viper-field-and-the-defense-of-the-sampo-1928.jpg'
+    #image_path = '/home/alvaro/ROVIT/openCV_2023/sample/akseli-gallen-kallela_ilmarinen-ploughing-the-viper-field-and-the-defense-of-the-sampo-1928.jpg'
     #image_path="/media/monica/One Touch/dataset_art/wikiart/Art_Nouveau_Modern/sample/a.y.-jackson_skeena-crossing-1926.jpg"
     #image = cv2.imread(image_path)
 
     # Example image from webcam
 
     #image=utils.take_photo()
-    #image=utils.take_photo_android()
-    resized_image = utils.crop_image(cv2.imread(image_path))
+    image=utils.take_photo_android()
+    resized_image = utils.crop_image(image)
 
     best_match = matcher.match_artwork(resized_image)
 
@@ -39,13 +39,16 @@ def main():
 
     # Close the window
     cv2.destroyAllWindows()
+    # Cleear console
+    os.system('clear')
 
     ##########################################################################
     # Ask for information about detected artwork
     bard_interface.set_preprompt("Please answer in less than 100 words and without images")
-    question = "Can you provide information about the artwork " + best_match[1]
+    question = "Provide information about the artwork " + best_match[1]
     answer = bard_interface.ask(question)
-    print(answer)
+    print(answer, flush=True)
+    print('', flush=True)
 
     stop = False
     while not stop:
