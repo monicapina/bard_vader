@@ -1,6 +1,6 @@
 # Bard Vader: Bard as a Virtual Assistant Device for Expert Art Recognition.
 
-![Project Logo](images/large-image.png){ width=50% }
+![Project Logo](docs/bardvader.avif){ width=50% }
 
 
 ## Description
