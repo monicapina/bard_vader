@@ -1,2 +1,4 @@
 bardapi
 requests
+SpeechRecognition
+pyaudio
