@@ -2,3 +2,5 @@ bardapi
 requests
 SpeechRecognition
 pyaudio
+opencv-python
+imutils
