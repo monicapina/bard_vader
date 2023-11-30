@@ -82,7 +82,7 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Credits
 
-This project has been carried out mainly by Mónica Pina, Francisco Morillas, and Álvaro Belmonte from RoViT Lab at the University of Alicante. We also want to thank our colleagues at the lab for helpful discussions and collaboration during these early stages of the project.
+This project has been carried out mainly by Mónica Pina, Francisco Morillas, and Álvaro Belmonte from RoViT Lab at the University of Alicante [(website)](https://www.rovit.ua.es/people/). We also want to thank our colleagues at the lab for helpful discussions and collaboration during these early stages of the project.
 
 ## Documentation
 
