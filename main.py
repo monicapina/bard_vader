@@ -20,13 +20,11 @@ def main():
    
     # Example image from computer
 
-    #image_path = '/home/alvaro/ROVIT/openCV_2023/sample/akseli-gallen-kallela_ilmarinen-ploughing-the-viper-field-and-the-defense-of-the-sampo-1928.jpg'
-    #image_path="/media/monica/One Touch/dataset_art/wikiart/Art_Nouveau_Modern/sample/a.y.-jackson_skeena-crossing-1926.jpg"
+    #image_path = './dataset/akseli-gallen-kallela_ilmarinen-ploughing-the-viper-field-and-the-defense-of-the-sampo-1928.jpg'
     #image = cv2.imread(image_path)
 
     # Example image from webcam
 
-    #image=utils.take_photo()
     image=utils.take_photo_android()
     resized_image = utils.crop_image(image)
 
